@@ -11,7 +11,7 @@ task :daily_problem => :environment do
     daily_problem = DailyProblem.find_by(week: time_diff[:week] + 1, day: time_diff[:day])
 
     notifier = Slack::Notifier.new webhook do
-      defaults channel: "#math-test",
+      defaults channel: "#daily_problems",
                username: "Actualize Jack"
     end
     notifier.ping daily_problem.content
