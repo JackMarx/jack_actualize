@@ -7,10 +7,11 @@ task :daily_problem => :environment do
   start_date = cohort.start_date
   today = Time.now.to_date
   time_diff = Time.diff(today, start_date, '%w %d')
-  time_diff_split = time_diff[:diff].split(', ')
-  diff_weeks = time_diff_split[0].gsub(" weeks", "").to_i
+  puts time_diff
+  time_diff_split = time_diff[:diff].split(' weeks ')
+  p time_diff_split
+  diff_weeks = time_diff_split[0].to_i
   diff_days = time_diff_split[1].gsub(" days", "").to_i
-
   if diff_days < 6 && diff_days > 0 && diff_weeks >= 0 && diff_weeks < 10
     daily_problem = DailyProblem.find_by(week: diff_weeks + 1, day: diff_days)
 
