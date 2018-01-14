@@ -8,10 +8,22 @@ task :daily_problem => :environment do
   today = Time.now.to_date
   time_diff = Time.diff(today, start_date, '%w %d')
   puts time_diff
-  time_diff_split = time_diff[:diff].split(' weeks ')
+
+  if time_diff.include?("weeks")
+    time_diff_split = time_diff[:diff].split(' weeks ')
+  else
+    time_diff_split = time_diff[:diff].split(' week ')
+  end
+
   p time_diff_split
   diff_weeks = time_diff_split[0].to_i
-  diff_days = time_diff_split[1].gsub(" days", "").to_i
+  
+  if time_diff_split[1].include?("days")
+    diff_days = time_diff_split[1].gsub(" days", "").to_i
+  else
+    diff_days = time_diff_split[1].gsub(" day", "").to_i
+  end
+
   if diff_days < 6 && diff_days > 0 && diff_weeks >= 0 && diff_weeks < 10
     daily_problem = DailyProblem.find_by(week: diff_weeks + 1, day: diff_days)
 
