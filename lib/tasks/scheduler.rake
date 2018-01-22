@@ -11,7 +11,7 @@ task :daily_problem => :environment do
   p time_diff
   puts
 
-  if time_diff.include?("weeks")
+  if time_diff[:diff].include?("weeks")
     time_diff_split = time_diff[:diff].split(' weeks ')
   else
     time_diff_split = time_diff[:diff].split(' week ')
