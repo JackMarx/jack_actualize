@@ -7,7 +7,9 @@ task :daily_problem => :environment do
   start_date = cohort.start_date
   today = Time.now.to_date
   time_diff = Time.diff(today, start_date, '%w %d')
-  puts time_diff
+  puts "time_diff"
+  p time_diff
+  puts
 
   if time_diff.include?("weeks")
     time_diff_split = time_diff[:diff].split(' weeks ')
@@ -15,7 +17,9 @@ task :daily_problem => :environment do
     time_diff_split = time_diff[:diff].split(' week ')
   end
 
+  puts "time_diff_split"
   p time_diff_split
+  puts
   diff_weeks = time_diff_split[0].to_i
   
   if time_diff_split[1].include?("days")
@@ -24,8 +28,10 @@ task :daily_problem => :environment do
     diff_days = time_diff_split[1].gsub(" day", "").to_i
   end
 
+  puts "...finding daily problem for Week #{diff_weeks}, Day #{diff_days}"
+
   if diff_days < 6 && diff_days > 0 && diff_weeks >= 0 && diff_weeks < 10
-    daily_problem = DailyProblem.find_by(week: diff_weeks + 1, day: diff_days)
+    daily_problem = DailyProblem.find_by(week: diff_weeks + 1, day: diff_days)https://actualize-chi-2017-12.slack.com/archives/C8L4263GQ/p1515326448000022
 
     notifier = Slack::Notifier.new webhook do
       defaults channel: "#daily_problems",
