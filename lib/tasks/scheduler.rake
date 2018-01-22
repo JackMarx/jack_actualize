@@ -9,6 +9,7 @@ task :daily_problem => :environment do
   time_diff = Time.diff(today, start_date, '%w %d')
   puts "time_diff"
   p time_diff
+  p time_diff[:diff]
   puts
 
   if time_diff[:diff].include?("weeks")
