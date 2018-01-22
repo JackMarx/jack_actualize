@@ -31,7 +31,7 @@ task :daily_problem => :environment do
   puts "...finding daily problem for Week #{diff_weeks}, Day #{diff_days}"
 
   if diff_days < 6 && diff_days > 0 && diff_weeks >= 0 && diff_weeks < 10
-    daily_problem = DailyProblem.find_by(week: diff_weeks + 1, day: diff_days)https://actualize-chi-2017-12.slack.com/archives/C8L4263GQ/p1515326448000022
+    daily_problem = DailyProblem.find_by(week: diff_weeks + 1, day: diff_days)
 
     notifier = Slack::Notifier.new webhook do
       defaults channel: "#daily_problems",
